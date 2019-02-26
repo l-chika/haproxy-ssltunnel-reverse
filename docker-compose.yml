@@ -1,0 +1,17 @@
+---
+version: '3'
+services:
+  haproxy:
+    image: haproxy:alpine
+    volumes:
+    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    - ./haproxy/cert.pem:/usr/local/etc/haproxy/cert.pem:ro
+    ports:
+    - ${HOST_LISTEN_PORT}:${LISTEN_PORT}
+    environment:
+    - GLOBAL_MAX_CONNECTION_NUM
+    - LISTEN_PORT
+    - BACKEND_SERVER_ADDR
+    - BACKEND_SERVER_PORT
+    - BACKEND_SERVER_MAX_CONNECTION_NUM
+
